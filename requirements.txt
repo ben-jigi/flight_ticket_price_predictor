@@ -1,0 +1,16 @@
+streamlit
+
+Flask
+
+scikit-learn
+
+category_encoders
+
+xgboost
+
+joblib
+
+pandas
+
+numpy
+
