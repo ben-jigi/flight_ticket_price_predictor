@@ -1,11 +1,11 @@
-Flask
-joblib
-numpy
 streamlit==1.30.0
 pandas==2.1.0
+numpy
 scikit-learn==1.6.1
 xgboost==1.7.6
 category_encoders==2.6.0
 dill==0.3.7
+joblib
+Flask
 
 
