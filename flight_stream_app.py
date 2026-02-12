@@ -1,14 +1,10 @@
 import streamlit as st
-import joblib
 import pandas as pd
 import os
+import dill
 
-# ======================
-# Load the trained model
-# ======================
-BASE_DIR = os.path.dirname(__file__)  # ensures path works locally and on Streamlit Cloud
-model_path = os.path.join(BASE_DIR, "model", "flight_model.pkl")
-pipeline = joblib.load(model_path)
+with open("model/flight_model.dill", "rb") as f:
+    pipeline = dill.load(f)
 
 # ======================
 # App title
@@ -57,4 +53,5 @@ if st.button("Predict Fare"):
         st.success(f"Predicted Flight Fare: ₹{prediction[0]:.2f}")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
+
 
