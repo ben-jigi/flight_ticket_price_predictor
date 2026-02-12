@@ -3,13 +3,22 @@ import dill
 import pandas as pd
 import os
 
-# Model path
+# Path to the model file
 MODEL_PATH = os.path.join("model", "flight_model.dill")
 
-# Load the model
-with open(MODEL_PATH, "rb") as f:
-    pipeline = dill.load(f)
-# ======================
+# Load the model safely
+@st.cache_data(show_spinner=False)
+def load_model(path):
+    with open(path, "rb") as f:
+        model = dill.load(f)
+    return model
+
+try:
+    pipeline = load_model(MODEL_PATH)
+except FileNotFoundError:
+    st.error(f"Model file not found at {MODEL_PATH}. Make sure it's in your repo!")
+except Exception as e:
+    st.error(f"Error loading model: {e}")
 # App title
 # ======================
 st.title("Flight Fare Prediction 🚀")
@@ -56,6 +65,7 @@ if st.button("Predict Fare"):
         st.success(f"Predicted Flight Fare: ₹{prediction[0]:.2f}")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
+
 
 
 
