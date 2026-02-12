@@ -1,11 +1,14 @@
 import streamlit as st
+import dill
 import pandas as pd
 import os
-import dill
 
-with open("model/flight_model.dill", "rb") as f:
+# Model path
+MODEL_PATH = os.path.join("model", "flight_model.dill")
+
+# Load the model
+with open(MODEL_PATH, "rb") as f:
     pipeline = dill.load(f)
-
 # ======================
 # App title
 # ======================
@@ -53,5 +56,6 @@ if st.button("Predict Fare"):
         st.success(f"Predicted Flight Fare: ₹{prediction[0]:.2f}")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
+
 
 
