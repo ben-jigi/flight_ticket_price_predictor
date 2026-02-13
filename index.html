@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Price Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, select { margin: 5px; padding: 5px; width: 220px; }
+        label { display: block; margin-top: 10px; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+        h2 { margin-top: 20px; color: green; }
+    </style>
+</head>
+<body>
+    <h1>Flight Price Prediction</h1>
+
+    <!-- Dropdowns -->
+    <label>Airline:
+        <select id="Airline">
+            {% for airline in airlines %}
+                <option>{{ airline }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <label>Source:
+        <select id="Source">
+            {% for source in sources %}
+                <option>{{ source }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <label>Destination:
+        <select id="Destination">
+            {% for dest in destinations %}
+                <option>{{ dest }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <label>Total Stops:
+        <select id="Total_Stops">
+            {% for stop in stops %}
+                <option>{{ stop }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <!-- Numeric inputs -->
+    <label>Journey Day: <input type="number" id="journey_day" min="1" max="31"></label>
+    <label>Journey Month: <input type="number" id="journey_month" min="1" max="12"></label>
+    <label>Weekday Number: <input type="number" id="weekday_num" min="0" max="6"></label>
+    <label>Journey Hour: <input type="number" id="journey_hour" min="0" max="23"></label>
+    <label>Journey Minute: <input type="number" id="journey_minute" min="0" max="59"></label>
+    <label>Duration (minutes): <input type="number" id="durations" min="0"></label>
+
+    <!-- Predict button -->
+    <button onclick="makePrediction()">Predict</button>
+
+    <!-- Result display -->
+    <h2 id="result"></h2>
+
+    <!-- Link JS -->
+    <script src="{{ url_for('static', filename='json.js') }}"></script>
+</body>
+</html>
